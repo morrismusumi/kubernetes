@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: netshoot
+  labels:
+    app.kubernetes.io/name: netshoot
+  name: netshoot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: netshoot
+  template:
+    metadata:
+      labels:
+        app: netshoot
+    spec:
+      containers:
+      - image: nicolaka/netshoot
+        name: netshoot
+        command: 
+          - /bin/sh
+          - -c
+          - sleep 86400
+      dnsConfig:
+            options:
+              - name: ndots
+                value: "2"
