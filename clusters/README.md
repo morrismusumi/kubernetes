@@ -7,7 +7,7 @@ cd homelab/kubernetes
 
 # Clone the kubespray Project
 ```
-clone https: //github.com/kubernetes-sigs/kubespray.git
+git clone https: //github.com/kubernetes-sigs/kubespray.git
 ```
 
 
