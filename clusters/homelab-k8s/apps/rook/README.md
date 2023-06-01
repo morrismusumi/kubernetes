@@ -1,4 +1,4 @@
-# All the instructions in this README are obtained from the [Rook Ceph Documentation](https://rook.io/docs/rook/latest/Getting-Started/quickstart/). Please always refer to the official documentation for the latest instructions. 
+All the instructions in this README are obtained from the [Rook Ceph Documentation](https://rook.io/docs/rook/latest/Getting-Started/quickstart/). Please always refer to the official documentation for the latest instructions. 
 
 
 
