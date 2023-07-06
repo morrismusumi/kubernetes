@@ -1,0 +1,25 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: web-app2-<YOUR_DOMAIN>
+  namespace: web-app2-a
+spec:
+  secretName: web-app2-<YOUR_DOMAIN>-tls
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  subject:
+    organizations:
+      - <YOUR_DOMAIN>
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  usages:
+    - server auth
+    - client auth
+  dnsNames:
+    - "*.<YOUR_DOMAIN>"
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer

@@ -1,0 +1,28 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: secure-<YOUR_DOMAIN>
+  namespace: default
+spec:
+  secretName: secure-<YOUR_DOMAIN>-tls
+  duration: 2160h # 90d
+  renewBefore: 360h # 15d
+  subject:
+    organizations:
+      - <YOUR_DOMAIN>
+  isCA: false
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: 2048
+  usages:
+    - server auth
+    - client auth
+  dnsNames:
+    - secure.<YOUR_DOMAIN>
+  ipAddresses:
+    - 192.168.0.5
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+    group: cert-manager.io
