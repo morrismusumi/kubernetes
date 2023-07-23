@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-app
+  labels:
+    app.kubernetes.io/name: web-app
+spec:
+  selector:
+    app.kubernetes.io/name: web-app
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  type: LoadBalancer

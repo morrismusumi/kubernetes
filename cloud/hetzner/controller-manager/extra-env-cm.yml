@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  HCLOUD_LOAD_BALANCERS_LOCATION: "hel1"
+  HCLOUD_LOAD_BALANCERS_DISABLE_PRIVATE_INGRESS: "true"
+  HCLOUD_LOAD_BALANCERS_USE_PRIVATE_IP: "true"
+  HCLOUD_LOAD_BALANCERS_ENABLED: ""
+kind: ConfigMap
+metadata:
+  name: hcloud-controller-manager-extra-env
+  namespace: kube-system

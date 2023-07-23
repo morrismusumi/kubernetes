@@ -1,0 +1,12 @@
+cloud_provider: external
+external_cloud_provider: hcloud
+
+external_hcloud_cloud:
+  token_secret_name: hcloud-api-token
+  with_networks: true
+  service_account_name: hcloud-sa
+  hcloud_api_token: <api-token>
+  controller_image_tag: v1.16.0
+
+kube_network_plugin: cilium
+network_id: kubernetes-node-network
