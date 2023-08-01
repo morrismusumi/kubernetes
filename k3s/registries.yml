@@ -1,0 +1,12 @@
+mirrors:
+  registry.home-k8s.lab:
+    endpoint:
+      - "https://registry.home-k8s.lab"
+
+configs:
+  "registry.home-k8s.lab":
+    auth:
+      username: admin
+      password: Harbor12345
+    tls:
+      insecure_skip_verify: true
