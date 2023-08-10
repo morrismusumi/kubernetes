@@ -1,0 +1,59 @@
+{
+    "mysql": {
+        "host": "${SEMAPHORE_DB_HOST}:${SEMAPHORE_DB_PORT}",
+        "user": "${SEMAPHORE_DB_USER}",
+        "pass": "${SEMAPHORE_DB_PASS}",
+        "name": "${SEMAPHORE_DB}",
+        "options": null
+    },
+    "bolt": {
+        "host": "",
+        "user": "",
+        "pass": "",
+        "name": "",
+        "options": null
+    },
+    "postgres": {
+        "host": "",
+        "user": "",
+        "pass": "",
+        "name": "",
+        "options": null
+    },
+    "dialect": "${SEMAPHORE_DB_DIALECT}",
+    "port": "",
+    "interface": "",
+    "tmp_path": "${SEMAPHORE_PLAYBOOK_PATH}",
+    "cookie_hash": "SPDKU8T8o90gJxi1hMIRHxgXZSBZNr12bs6DGZzRWQk=",
+    "cookie_encryption": "V0y59iq5R+0gcArR2bLiIHCPxom3QrjU9Z2I0uL5E8s=",
+    "access_key_encryption": "${SEMAPHORE_ACCESS_KEY_ENCRYPTION}",
+    "email_sender": "",
+    "email_host": "",
+    "email_port": "",
+    "email_username": "",
+    "email_password": "",
+    "web_host": "",
+    "ldap_binddn": "",
+    "ldap_bindpassword": "",
+    "ldap_server": "",
+    "ldap_searchdn": "",
+    "ldap_searchfilter": "",
+    "ldap_mappings": {
+        "dn": "",
+        "mail": "",
+        "uid": "",
+        "cn": ""
+    },
+    "telegram_chat": "",
+    "telegram_token": "",
+    "slack_url": "",
+    "max_parallel_tasks": 0,
+    "email_alert": false,
+    "email_secure": false,
+    "telegram_alert": false,
+    "slack_alert": false,
+    "ldap_enable": false,
+    "ldap_needtls": false,
+    "ssh_config_path": "",
+    "demo_mode": false
+}

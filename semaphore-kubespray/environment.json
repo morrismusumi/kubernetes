@@ -1,0 +1,10 @@
+{
+    "cluster_name": "kube-dev",
+    "kube_version": "v1.26.7",
+    "registry_enabled": "true",
+    "metrics_server_enabled": "true",
+    "local_path_provisioner_enabled": "true",
+    "ingress_nginx_enabled": "true",
+    "metallb_enabled": "true",
+    "kube_proxy_strict_arp": "true"
+}
