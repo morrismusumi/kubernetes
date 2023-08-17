@@ -22,14 +22,14 @@ RUN git clone https://github.com/kubernetes-sigs/kubespray /tmp/kubespray
 RUN cd /tmp/kubespray && pip install -U -r requirements.txt
 # Download and install semaphore
 RUN cd /tmp && wget https://github.com/ansible-semaphore/semaphore/releases/\
-download/v2.8.75/semaphore_2.8.75_linux_amd64.deb
-RUN dpkg -i /tmp/semaphore_2.8.75_linux_amd64.deb
+download/v2.8.90/semaphore_2.8.90_linux_amd64.deb 
+RUN dpkg -i /tmp/semaphore_2.8.90_linux_amd64.deb 
 # Copy semaphore config
 COPY config_template.json /semaphore/config_template.json
 COPY entrypoint.sh /semaphore/entrypoint.sh
 RUN chmod +x /semaphore/entrypoint.sh
 
 # Clean up
-RUN rm -rf /tmp/kubespray && rm -rf /tmp/semaphore_2.8.75_linux_amd64.deb
+RUN rm -rf /tmp/kubespray && rm -rf /tmp/semaphore_2.8.90_linux_amd64.deb 
 # Startup process
 ENTRYPOINT ["/semaphore/entrypoint.sh"]
