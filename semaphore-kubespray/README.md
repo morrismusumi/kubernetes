@@ -16,7 +16,7 @@ if "docker-compose build" or "docker compose build" does't work try to cd into t
 ```sh
 docker build -t {image-name}:{version} .
 e.g
-docker build -t kubespay-semaphore:2.8.90 .
+docker build -t kubespray-semaphore:2.8.90 .
 ```
 
 Login to the web-UI at https://localhost:3000 or https://<YOUR_SERVER_IP>:3000
