@@ -1,10 +1,52 @@
 {
     "cluster_name": "kube-dev",
-    "kube_version": "v1.26.7",
+    "kube_version": "v1.27.4",
     "registry_enabled": "true",
     "metrics_server_enabled": "true",
     "local_path_provisioner_enabled": "true",
     "ingress_nginx_enabled": "true",
     "metallb_enabled": "true",
-    "kube_proxy_strict_arp": "true"
+    "metallb_config": {
+      "address_pools": {
+        "primary": {
+          "ip_range": [
+            "192.1.0.16-192.1.3.254"
+          ],
+          "auto_assign": true
+        }
+      },
+      "layer2": [
+        "primary"
+      ],
+      "controller": {
+        "nodeselector": {
+          "kubernetes.io/os": "linux"
+        },
+        "tolerations": [
+          {
+            "key": "node-role.kubernetes.io/control-plane",
+            "operator": "Equal",
+            "value": "",
+            "effect": "NoSchedule"
+          }
+        ]
+      },
+      "speaker": {
+        "nodeselector": {
+          "kubernetes.io/os": "linux"
+        },
+        "tolerations": [
+          {
+            "key": "node-role.kubernetes.io/control-plane",
+            "operator": "Equal",
+            "value": "",
+            "effect": "NoSchedule"
+          }
+        ]
+      }
+    },
+    "argocd_enabled": "true",
+    "argocd_admin_password": "changeme",
+    "kube_proxy_strict_arp": "true",
+    "cert_manager_enabled": "true"
 }
