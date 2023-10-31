@@ -942,10 +942,10 @@ communications:
 
       # -- Slack bot token for your own Slack app.
       # [Ref doc](https://api.slack.com/authentication/token-types).
-      botToken: 'xoxb-1808892192928-6014361904150-s1s2ZmpSmELgqKLLP1XDpQjg'
+      botToken: ''
       # -- Slack app-level token for your own Slack app.
       # [Ref doc](https://api.slack.com/authentication/token-types).
-      appToken: 'xapp-1-A060ZJUC7T3-6044003497088-d42bfd784f14d64daeb519bc278b67ee6f32d0dc0d25fb6b539d265a9ad6cdb0'
+      appToken: ''
     ## Settings for Mattermost.
     mattermost:
       # -- If true, enables Mattermost bot.
