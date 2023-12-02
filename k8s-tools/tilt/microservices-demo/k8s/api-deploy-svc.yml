@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservices-demo-api
+  namespace: microservices-demo
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: microservices-demo-api
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: microservices-demo-api
+    spec:
+      containers:
+      - name: microservices-demo-api
+        image: registry.nebula-west.home-k8s.lab/k8s/microservices-demo-api
+        ports:
+        - containerPort: 8000
+        env:
+          # Postgresql config
+          - name: DB_HOST
+            value: "postgresql"
+          - name: DB_PORT
+            value: "5432"
+          - name: DB_USER
+            value: "postgres"
+          - name: DB
+            value: "postgres"
+          - name: DB_PASS
+            valueFrom:
+              secretKeyRef:
+                name: postgresql
+                key: postgres-password
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: microservices-demo-api-svc
+  namespace: microservices-demo
+spec:
+  selector:
+    app.kubernetes.io/name: microservices-demo-api
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000

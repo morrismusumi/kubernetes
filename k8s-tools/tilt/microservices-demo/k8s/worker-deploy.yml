@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservices-demo-worker
+  namespace: microservices-demo
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: microservices-demo-worker
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: microservices-demo-worker
+    spec:
+      containers:
+      - name: microservices-demo-worker
+        image: registry.nebula-west.home-k8s.lab/k8s/microservices-demo-worker
+        ports:
+        - containerPort: 8000
+        env:
+          # Postgresql config
+          - name: API_BASE_URL
+            value: "http://microservices-demo-api-svc:8000"
+   
