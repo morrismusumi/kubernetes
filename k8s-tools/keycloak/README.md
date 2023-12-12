@@ -33,6 +33,35 @@ vi /etc/kubernetes/manifests/kube-apiserver.yaml
 - —-oidc-ca-file=/etc/ssl/certs/kevcloak-ca.crt
 ```
 
+
+### Create OIDC User
+
+```sh
+kubectl config set-credentials oidc-admin \
+--exec-api-version=client.authentication.k8s.io/v1beta1 \
+--exec-command=kubectl \
+--exec-arg=oidc-login \
+--exec-arg=get-token \
+--exec-arg=--oidc-issuer-url=https://YOUR_KEYCLOAK_HOSTNAME/realms/kubernetes \
+--exec-arg=--oidc-client-id=kubernetes \
+--exec-arg=--oidc-extra-scope="groups email openid" \
+--exec-arg=--oidc-client-secret=CLINET SECRET \
+--exec-arg=--insecure-skip-tls-verify
+```
+
+### Set OIDC User as default for current context
+
+```sh
+kubectl config set-context CONTEXT_NAME --cluster=CLUSTER_NAME --user=oidc-admin
+```
+
+### Create ClusterRoleBinding
+
+```sh
+kubectl apply -f user-cluster-role-binding.yml
+```
+
+
 ### Enable Audit Logs for API Server
 
 ```sh
