@@ -1,0 +1,12 @@
+apiVersion: homelab.io/v1alpha1
+kind: Database
+metadata:
+  name: harbor
+  namespace: default
+spec:
+  credentials:
+    username: harbor
+    password: pass123
+  compositionRef:
+    name: postgresql-database
+

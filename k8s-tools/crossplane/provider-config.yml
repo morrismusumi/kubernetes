@@ -1,0 +1,57 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: ProviderConfig
+metadata:
+  name: postgresql
+spec:
+
+  credentials:
+    - filename: credentials.auto.tfvars
+      source: Secret
+      secretRef:
+        namespace: crossplane-system
+        name: tf-postgres-creds
+        key: credentials
+
+  configuration: |
+    provider "postgresql" {
+      host            = var.postgres_server_ip
+      port            = var.postgres_server_port
+      database        = "postgres"
+      username        = var.postgres_username
+      password        = var.postgres_password
+      sslmode         = "disable"
+      connect_timeout = 15
+    }
+
+    variable "postgres_server_ip" {
+      type = string
+    }
+
+    variable "postgres_server_port" {
+      type = string
+      default = 5432
+    }
+
+    variable "postgres_username" {
+      type = string
+    }
+
+    variable "postgres_password" {
+      type = string
+    }
+
+    terraform {
+
+      required_providers {
+        postgresql = {
+          source  = "cyrilgdn/postgresql"
+          version = ">=1.21.0"
+        }
+      }
+      
+      backend "kubernetes" {
+        secret_suffix     = "postgresql-provider-config"
+        namespace         = "crossplane-system"
+        in_cluster_config = true
+      }
+    }

@@ -1,0 +1,50 @@
+apiVersion: tf.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  name: test-db
+  namespace: default
+spec:
+  forProvider:
+    source: Inline
+    module: |
+
+      resource "postgresql_role" "new_role" {
+        name     = "test_db_user"
+        login    = true
+        password = "test_db_pass"
+      }
+
+      resource "postgresql_database" "new_db" {
+        name              = "test_db"
+        owner             = "test_db_user"
+        connection_limit  = -1
+        allow_connections = true
+      }
+
+      output "POSTGRES_DB_USER" {
+        description = "The name of the role"
+        value       = postgresql_role.new_role.name
+        sensitive   = false
+      }
+
+      output "POSTGRES_DB_PASS" {
+        description = "The password for the role"
+        value       = postgresql_role.new_role.password
+        sensitive   = true
+      }
+
+      output "POSTGRES_DB_HOST" {
+        description = "The password for the role"
+        value       = var.postgres_server_ip
+      }
+
+      output "POSTGRES_DB_PORT" {
+        description = "The password for the role"
+        value       = var.postgres_server_port
+      }
+
+  writeConnectionSecretToRef:
+    namespace: default
+    name: test-db-conn
+  providerConfigRef:
+    name: postgresql

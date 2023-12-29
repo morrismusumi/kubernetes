@@ -1,0 +1,30 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata: 
+  name: databases.homelab.io
+spec:
+  group: homelab.io
+  names:
+    kind: Database
+    plural: databases
+  versions:
+  - name: v1alpha1
+    referenceable: True
+    served: True
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              credentials: 
+                type: object
+                description: "The database credentials"
+                properties:
+                  username:
+                    type: string
+                    description: "The database username"
+                  password:
+                    type: string
+                    description: "The database password"

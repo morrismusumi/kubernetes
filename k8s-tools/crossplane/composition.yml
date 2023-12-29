@@ -1,0 +1,119 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: postgresql-database
+spec:
+  resources:
+    - name: Database
+      patches:
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.vars[0].value
+
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.credentials.username
+          toFieldPath: spec.forProvider.vars[1].value
+
+        - type: FromCompositeFieldPath
+          fromFieldPath: spec.credentials.password
+          toFieldPath: spec.forProvider.vars[2].value
+
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.namespace
+          toFieldPath: metadata.namespace
+
+        - type: CombineFromComposite
+          combine:
+            variables:
+              - fromFieldPath: metadata.name
+            strategy: string
+            string:
+              fmt: "%s-db-conn"
+          toFieldPath: spec.writeConnectionSecretToRef.name
+
+        - type: FromCompositeFieldPath
+          fromFieldPath: metadata.namespace
+          toFieldPath: spec.writeConnectionSecretToRef.namespace
+
+      base:    
+        apiVersion: tf.upbound.io/v1beta1
+        kind: Workspace
+        metadata:
+          name: test-db-1
+          namespace: default
+        spec:
+          forProvider:
+            source: Inline
+            vars:
+              - key: db_name
+                value: new_db
+              - key: db_user
+                value: generate
+              - key: db_pass
+                value: generate
+            module: |
+
+              variable "db_name" {
+                description = "DB name"
+                type        = string
+              }
+
+              variable "db_user" {
+                description = "DB user"
+                type        = string
+              }
+
+              variable "db_pass" {
+                description = "DB pass"
+                type        = string
+              }
+
+              resource "random_password" "password" {
+                length = 16
+                special = true
+              }
+
+              resource "postgresql_role" "new_role" {
+                name     = var.db_user
+                login    = true
+                password = var.db_pass == "generate" ? random_password.password.result : var.db_pass
+              }
+
+              resource "postgresql_database" "new_db" {
+                name              = var.db_name
+                owner             = postgresql_role.new_role.name
+                connection_limit  = -1
+                allow_connections = true
+              }
+
+              output "POSTGRES_DB_USER" {
+                description = "The name of the role"
+                value       = postgresql_role.new_role.name
+                sensitive   = false
+              }
+
+              output "POSTGRES_DB_PASS" {
+                description = "The password for the role"
+                value       = postgresql_role.new_role.password
+                sensitive   = true
+              }
+
+              output "POSTGRES_DB_HOST" {
+                description = "The password for the role"
+                value       = var.postgres_server_ip
+              }
+
+              output "POSTGRES_DB_PORT" {
+                description = "The password for the role"
+                value       = var.postgres_server_port
+              }
+
+          providerConfigRef:
+            name: postgresql
+          writeConnectionSecretToRef:
+            namespace: default
+            name: test-db-conn
+
+  compositeTypeRef:
+    apiVersion: homelab.io/v1alpha1
+    kind: Database
