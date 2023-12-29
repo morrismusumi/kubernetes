@@ -1,4 +1,4 @@
-postgres_server_ip = "172.30.0.155"
+postgres_server_ip = "SERVER_IP"
 postgres_server_port = 5432
-postgres_username = "postgres"
-postgres_password = "M2b3NdG1va"
+postgres_username = "USERNAME"
+postgres_password = "PASSWORD"
