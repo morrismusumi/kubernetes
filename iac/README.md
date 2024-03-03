@@ -18,7 +18,7 @@ sudo apt update -y && sudo apt install libguestfs-tools -y
 
 ### Download debian cloud image
 ```
-wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-generic-arm64.qcow2
+wget https://cloud.debian.org/images/cloud/bullseye/latest/debian-11-generic-amd64.qcow2
 ```
 
 ### Install qemu-guest-agent in the cloud image
