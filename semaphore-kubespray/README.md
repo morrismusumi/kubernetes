@@ -1,6 +1,6 @@
 Deploy Kubernetes with Ansible Semaphore UI and Kubespray
 ------------
-This project is based on the [Ansible Semaphore](https://github.com/ansible-semaphore/semaphore) project. 
+This project is based on the [Ansible Semaphore](https://github.com/ansible-semaphore/semaphore) and the [Kubespray](https://github.com/kubernetes-sigs/kubespray) projects. 
 ### Install semaphore-kubespray with Docker
 
 Build and run the semaphore-kubespray docker image
