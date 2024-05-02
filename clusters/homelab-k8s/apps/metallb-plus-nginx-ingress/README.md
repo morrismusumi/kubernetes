@@ -32,7 +32,7 @@ $ kubectl -n default get services
 
 # Install NGINX Ingress Controller with Helm
 ```
-$ helm pull oci://gher.io/nginxinc/charts/nginx-ingress --untar --version 0.17.1
+$ helm pull oci://ghcr.io/nginxinc/charts/nginx-ingress --untar --version 0.17.1
 $ cd nginx-ingress
 $ kubectl apply -f crds
 $ helm install nginx-ingress oci://ghcr.io/nginxinc/charts/nginx-ingress --version 0.17.1 
