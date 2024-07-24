@@ -27,7 +27,7 @@ vi /etc/kubernetes/manifests/kube-apiserver.yaml
 
 # Add below extra args to kube-apiserver command
 - —-oidc-issuer-url=YOUR_KEYCLOAK_HOSTNAME/realms/kubernetes
-- —-oidc-client-id-kubernetes
+- —-oidc-client-id=kubernetes
 - —-oidc-username-claim=email
 - —-oidc-groups-claim=groups
 - —-oidc-ca-file=/etc/ssl/certs/kevcloak-ca.crt
