@@ -1,0 +1,15 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+networking:
+kubeadmConfigPatches:
+  - |
+    apiVersion: kubeadm.k8s.io/v1beta3
+    kind: ClusterConfiguration
+    networking:
+      # This sets the domain in CoreDNS
+      dnsDomain: "k8s.staging.local"
+nodes:
+- role: control-plane
+- role: worker
+- role: worker
+- role: worker
